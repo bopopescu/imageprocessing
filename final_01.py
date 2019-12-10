@@ -163,9 +163,9 @@ while True:
 	myresult = mycursor.fetchall()
 	for x in myresult:
 		distance1 = x[0]
-		distance2 = x[1]
+		#distance2 = x[1]
 	distance1 = int(distance1)
-	distance2 = int(distance2)
+	#distance2 = int(distance2)
 	# mydb.close()
 
 	# grab the current frame, then handle if we are using a
@@ -242,7 +242,7 @@ while True:
 	endY = int(endY / rH)
 
 	im1 = im.crop((startX-15, startY-10, endX+10, endY+10))
-	if (abs(distance1 - distance2) < 2):
+	if (abs(distance1) < 2):
 		im1.save("D:\\image processing\\final_saved.png", "PNG")
 
 		test = (get_string(src_path + "\\final_saved.png"))
@@ -266,9 +266,9 @@ while True:
 			except mysql.connector.Error as error:
 				print("Failed to insert record into Location {}".format(error))
 
-			# finally:
-			# 	if (connection.is_connected()):
-			# 		connection.close()
+			finally:
+				if (connection.is_connected()):
+					connection.close()
 
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):

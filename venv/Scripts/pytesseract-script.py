@@ -1,4 +1,4 @@
-#!D:\hackathon\venv\Scripts\python.exe
+#!"D:\image processing\venv\Scripts\python.exe"
 # EASY-INSTALL-ENTRY-SCRIPT: 'pytesseract==0.3.0','console_scripts','pytesseract'
 __requires__ = 'pytesseract==0.3.0'
 import re
