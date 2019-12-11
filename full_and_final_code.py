@@ -14,8 +14,8 @@ import pytesseract
 from PIL import Image
 import mysql.connector
 
-location_01=["BANESWHOR", "KOTESHWOR", "SAKAR"]
-src_path = "D:\\image processing"
+location_01=["BANESWHOR", "KOTESHWOR", "SAKAR", "name of the bus stop"]
+src_path = "location of the folder"
 
 def get_string(img_path):
     # Read image with opencv
@@ -23,18 +23,16 @@ def get_string(img_path):
 
     # Convert to gray
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # Write image after removed noise
-    cv2.imwrite(src_path + "\\sakar.png", img)
+    cv2.imwrite(src_path + "\\in_gray.png", img)
 
     #  Apply threshold to get image with only black and white
     img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2)
 
     # Write the image after apply opencv to do some ...
-    cv2.imwrite(src_path + "\\sakar01.png", img)
+    cv2.imwrite(src_path + "\\image.png", img)
 
     # Recognize text with tesseract for python
-    result = pytesseract.image_to_string(Image.open(src_path + "\\sakar01.png"))
+    result = pytesseract.image_to_string(Image.open(src_path + "\\image.png"))
 
     return result
 def decode_predictions(scores, geometry):
@@ -219,7 +217,7 @@ while True:
 	# if the `s` key was pressed, save the image and crop the character detected frame
 
 	cv2.imwrite(filename='saved_img.png', img=frame)
-	im = Image.open(r"D:\\image processing\\saved_img.png")
+	im = Image.open(r"location of the folder\\saved_img.png")
 
 	width, height = im.size
 	print("img size: ", width, height)
@@ -233,7 +231,7 @@ while True:
 
 	im1 = im.crop((startX-15, startY-10, endX+10, endY+10))
 	if (abs(distance1) < 2):	#condition to see according to requirement
-		im1.save("D:\\image processing\\final_saved.png", "PNG")
+		im1.save("loaction of the folder\\final_saved.png", "PNG")
 
 		test = (get_string(src_path + "\\final_saved.png"))
 		print(test)
